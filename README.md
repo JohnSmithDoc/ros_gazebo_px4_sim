@@ -1,0 +1,2 @@
+# ros_gazebo_px4_sim
+使用ros和px4已经gazebo进行联合仿真的项目文件
