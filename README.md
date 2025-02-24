@@ -21,6 +21,10 @@
 
   首先利用官方提供的代码，建立了offb_node节点，实现控制无人机进入offboard并起飞到2m然后一直保持在2m的高度，官方历程请 ref:https://docs.px4.io/v1.13/en/ros/mavros_offboard_cpp.html
   注意：运行之前需要source一下（如果将source加入了bashrc.sh中就不用每次都source）
+
+  运行此测试节点的命令如下：
+  > rosrun ros_ctrl_px4_test offb_node
+
 </ol>
 
 ## TODO
