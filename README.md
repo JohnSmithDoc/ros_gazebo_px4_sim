@@ -14,6 +14,15 @@
   <li>最后再拉起我们自己编写的ros节点，来控制无人机。正常来说，我们自己的ros节点是通过mavros节点间接控制无人机的，即我们发布话题/服务请求/Action给mavros，然后mavros再转换，通过mavlink发送给飞控</li>    
 </ol>
 
+## Demo测试
+
+<ol>
+  <li>简单的offboard控制测试</li>  
+
+  首先利用官方提供的代码，建立了offb_node节点，实现控制无人机进入offboard并起飞到2m然后一直保持在2m的高度，官方历程请 ref:https://docs.px4.io/v1.13/en/ros/mavros_offboard_cpp.html
+  注意：运行之前需要source一下（如果将source加入了bashrc.sh中就不用每次都source）
+</ol>
+
 ## TODO
 后续需要将mavlink和mavros这两个仓库作为ros_gazebo_px4_sim_ws的子模块来自己管理起来，不然有些麻烦
 
