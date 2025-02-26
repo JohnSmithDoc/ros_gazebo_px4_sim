@@ -41,6 +41,11 @@ Eigen::Vector3d t_bc,t_wb,t_ca;
 
 Quaterniond q_wb,q_ca;
 
+// 无人机初始位置
+double drone_origin_position_ENU[3]={0,0,0};
+
+double target_z = 2.0;
+
 //double drone_position_ENU[3]={0,0,0}; //无人机ENU世界系下位置
 
 //double aruco_position_cam[3]={0,0,0}; //aruco二维码检测得到的位置也就是相机系下的位置
@@ -125,6 +130,11 @@ int main(int argc, char **argv)
     while(ros::ok() && !current_state.connected){
         ros::spinOnce();
         rate.sleep();
+
+        drone_origin_position_ENU[0] = t_wb[0];
+        drone_origin_position_ENU[1] = t_wb[1];
+        drone_origin_position_ENU[2] = t_wb[2];
+        target_z = drone_origin_position_ENU[2] + 1.5;
     }
 
     mavros_msgs::PositionTarget pos_setpoint;  //创建一个mavros_msgs::PositionTarget类型的实例化对象
@@ -132,7 +142,7 @@ int main(int argc, char **argv)
     pos_setpoint.coordinate_frame = 1;
     pos_setpoint.position.x = 0;
     pos_setpoint.position.y = 0;
-    pos_setpoint.position.z = 2;
+    pos_setpoint.position.z = target_z;//drone_origin_position_ENU[2] + 2;
     pos_setpoint.yaw = 0;
 
     //send a few setpoints before starting
@@ -184,7 +194,7 @@ int main(int argc, char **argv)
         }
 
         //ros::Duration(1.0).sleep();
-        if((abs(t_wb[0])<0.2&&abs(t_wb[1])<0.2&&abs(t_wb[2]-2)<0.2)&&(ros::Time::now() - last_request > ros::Duration(5.0)))
+        if((abs(t_wb[0])<0.2&&abs(t_wb[1])<0.2&&abs(t_wb[2]-target_z)<0.3)&&(ros::Time::now() - last_request > ros::Duration(5.0)))
         {
             state_flag = 1;
         }
@@ -192,11 +202,11 @@ int main(int argc, char **argv)
         if( state_flag == 1)
         {
          std::cout << "state 1" << std::endl;
-         pos_setpoint.position.x = 1.5;
-         pos_setpoint.position.y = 1.5;
-         pos_setpoint.position.z = 2; 
+         pos_setpoint.position.x = 2.0;
+         pos_setpoint.position.y = 2.0;
+        //  pos_setpoint.position.z = 2; 
   
-         if((abs(t_wb[0]-1.5)<0.2&&(abs(t_wb[1]-1.5)<0.2)&&abs(t_wb[2]-2)<0.2)&&(t_ca[2] != 0))
+         if((abs(t_wb[0]-2.0)<0.2&&(abs(t_wb[1]-2.0)<0.2)&&abs(t_wb[2]-target_z)<0.2)&&(t_ca[2] != 0))
          {
             state_flag = 2;
          }
@@ -226,9 +236,12 @@ int main(int argc, char **argv)
          // 获取T中的平移向量
          Vector3d t_wa = Twa.translation();
 
-         pos_setpoint.position.x = t_wa[0];
-         pos_setpoint.position.y = t_wa[1];
-         pos_setpoint.position.z = t_wa[2] + 2; 
+         if((t_ca[2] != 0))
+         {
+            pos_setpoint.position.x = t_wa[0];
+            pos_setpoint.position.y = t_wa[1];
+            //  pos_setpoint.position.z = 2;//t_wa[2] + 2; 
+         }
 
          if((abs(t_ca[0])<0.1)&&(abs(t_ca[1])<0.1))
          {
@@ -272,9 +285,11 @@ int main(int argc, char **argv)
          // 获取T中的平移向量
          Vector3d t_wa = Twa.translation();
 
-         pos_setpoint.position.x = t_wa[0];
-         pos_setpoint.position.y = t_wa[1];
-         pos_setpoint.position.z = t_wa[2] + 2 - 0.1*now_time_relate_from_state2; 
+         if((t_ca[2] != 0)) {
+            pos_setpoint.position.x = t_wa[0];
+            pos_setpoint.position.y = t_wa[1];
+            pos_setpoint.position.z = target_z - 0.1*now_time_relate_from_state2;//t_wa[2] + 2 - 0.1*now_time_relate_from_state2; 
+         }
 
          if(t_wb[2] < 0.35)
          {
@@ -299,10 +314,13 @@ int main(int argc, char **argv)
          pos_setpoint.type_mask = 0b100111111000;  // 100 111 111 000  xyz + yaw
          pos_setpoint.coordinate_frame = 1;
 
-         pos_setpoint.position.x = t_wa[0];
-         pos_setpoint.position.y = t_wa[1];
-         pos_setpoint.position.z = t_wa[2] + 0.3; 
-         pos_setpoint.yaw = 0;
+         if((t_ca[2] != 0))
+         {
+            pos_setpoint.position.x = t_wa[0];
+            pos_setpoint.position.y = t_wa[1];
+            pos_setpoint.position.z = 0.3;//t_wa[2] + 0.3; 
+            pos_setpoint.yaw = 0;
+         }
         
          if((abs(t_ca[0])<0.1)&&(abs(t_ca[1])<0.1))
          {

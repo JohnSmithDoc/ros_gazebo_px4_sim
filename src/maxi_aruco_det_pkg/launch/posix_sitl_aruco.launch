@@ -18,7 +18,9 @@
     <!-- <arg name="world" default="$(find mavlink_sitl_gazebo)/worlds/empty.world"/> -->
     <!-- 使用aruco_target世界 -->
     <arg name="world" default="$(find mavlink_sitl_gazebo)/worlds/aruco_target.world"/>
-    <arg name="sdf" default="$(find mavlink_sitl_gazebo)/models/iris_fpv_cam/iris_fpv_cam.sdf"/>
+    <!-- <arg name="sdf" default="$(find mavlink_sitl_gazebo)/models/iris_fpv_cam/iris_fpv_cam.sdf"/> -->
+    <!-- 使用自定义的单目相机模型 -->
+    <arg name="sdf" default="$(find mavlink_sitl_gazebo)/models/iris_down_monocular_cam/iris_down_monocular_cam.sdf"/>
 
     <env name="PX4_SIM_MODEL" value="$(arg vehicle)" />
     <env name="PX4_ESTIMATOR" value="$(arg est)" />

@@ -21,7 +21,9 @@
     <arg name="world" default="$(find mavlink_sitl_gazebo)/worlds/aruco_target.world"/>
     <!-- <arg name="sdf" default="$(find mavlink_sitl_gazebo)/models/$(arg vehicle)/$(arg vehicle).sdf"/> -->
     <!-- 世界中的模型使用带有下视摄像头的iris无人机 -->
-    <arg name="sdf" default="$(find mavlink_sitl_gazebo)/models/iris_fpv_cam/iris_fpv_cam.sdf"/>
+    <!-- <arg name="sdf" default="$(find mavlink_sitl_gazebo)/models/iris_fpv_cam/iris_fpv_cam.sdf"/> -->
+    <!-- 使用自定义的单目相机模型 -->
+    <arg name="sdf" default="$(find mavlink_sitl_gazebo)/models/iris_down_monocular_cam/iris_down_monocular_cam.sdf"/>
 
     <!-- gazebo configs -->
     <arg name="gui" default="true"/>
