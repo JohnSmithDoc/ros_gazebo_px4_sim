@@ -1,0 +1,13 @@
+<launch>
+  <node name="aruco_det" pkg="maxi_aruco_det_pkg" type="aruco_det" output="screen" >
+    <param name="dictionary_id" value="10" />
+    <param name="aruco_id" value="31" />
+    <!-- aruco_length单位是米 -->
+    <param name="aruco_length" value="0.2" />
+    <param name="camera_param_path" value="$(find maxi_aruco_det_pkg)/config/camera_gazebo.yaml" />
+    <param name="sub_image_topic" value="/iris/usb_cam/image_raw" />
+  </node>
+ 
+</launch>
+
+
