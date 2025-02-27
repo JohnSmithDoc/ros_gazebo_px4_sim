@@ -33,7 +33,7 @@
   <ol>
   <li>使用的是PX4 V1.11.3版本，自己独立维护了一个分支，分支为：https://github.com/JohnSmithDoc/PX4-Autopilot/tree/master_v1_11_3</li> 
 
-  <li>同时PX4的Gazebo子模块也独立维护了一个分支，分支为：https://github.com/JohnSmithDoc/gazebo_v1_11_3</li> 
+  <li>同时PX4的Gazebo子模块也独立维护了一个分支，分支为：https://github.com/JohnSmithDoc/gazebo_v1_11_3/tree/gazebo_for_master_v1_11_3</li> 
 
   <li>在PX4编译时尽量不要用到 make distclean 命令，不然你需要重新拉取一下gazebo的仓库</li> 
 
@@ -41,7 +41,7 @@
 
   <li>ubuntu 版本是20.04，ros版本是neotic</li> 
 
-  <li>可以直接使用maxi_aruco_det_pkg/scripts中的start_aruco_land_all_in_one.sh一次性拉起所有节点</li> 
+  <li>可以直接使用maxi_aruco_det_pkg/scripts中的start_aruco_land_all_in_one.sh一次性拉起所有节点，不过第一次使用还是建议先自己一个一个拉起节点测试，因为第一次gazebo的加载可能会花比较长的时间</li> 
 
   </ol>
 
