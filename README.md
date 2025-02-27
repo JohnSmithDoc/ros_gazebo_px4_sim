@@ -25,6 +25,26 @@
   运行此测试节点的命令如下：
   > rosrun ros_ctrl_px4_test offb_node
 
+  <li>使用gazebo仿真二维码降落</li>  
+  这个Demo是在这个开源项目上进行了小小的修改而来的，项目链接：https://gitee.com/maxibooksiyi/maxi_aruco_det_pkg
+  关于这个的讲解作者也专门出了两期视频，很有用，视频连接：https://blog.csdn.net/sinat_16643223/article/details/138092922?spm=1001.2014.3001.5501
+
+  此Demo说明如下：
+  <ol>
+  <li>使用的是PX4 V1.11.3版本，自己独立维护了一个分支，分支为：https://github.com/JohnSmithDoc/PX4-Autopilot/tree/master_v1_11_3</li> 
+
+  <li>同时PX4的Gazebo子模块也独立维护了一个分支，分支为：https://github.com/JohnSmithDoc/gazebo_v1_11_3</li> 
+
+  <li>在PX4编译时尽量不要用到 make distclean 命令，不然你需要重新拉取一下gazebo的仓库</li> 
+
+  <li>我使用的opencv 版本是4.2.0，也可以正常使用</li> 
+
+  <li>ubuntu 版本是20.04，ros版本是neotic</li> 
+
+  <li>可以直接使用maxi_aruco_det_pkg/scripts中的start_aruco_land_all_in_one.sh一次性拉起所有节点</li> 
+
+  </ol>
+
 </ol>
 
 ## TODO
